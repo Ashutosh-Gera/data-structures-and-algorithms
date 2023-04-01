@@ -1,0 +1,19 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build and Run",
+            "type": "shell",
+            "command": "cd ${fileDirname} && g++ -std=c++17 -O2 -Wall ${file} -o ${fileBasenameNoExtension} && ./${fileBasenameNoExtension}",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
+
+
+
+ // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
