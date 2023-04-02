@@ -2,12 +2,20 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../codeforces"
+		},
+		{
+			"path": "../atcoder"
+		},
+		{
+			"path": "../cses"
 		}
 	],
 	"settings": {
 		"files.associations": {
-			"iostream": "cpp",
-			"random": "cpp"
+			"iostream": "cpp"
 		}
 	}
 }
