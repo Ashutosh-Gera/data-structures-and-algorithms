@@ -11,12 +11,19 @@
 		},
 		{
 			"path": "../cses"
+		},
+		{
+			"path": "../sem4/ada/labTwo"
 		}
 	],
 	"settings": {
 		"files.associations": {
 			"iostream": "cpp",
-			"random": "cpp"
+			"random": "cpp",
+			"new": "cpp",
+			"deque": "cpp",
+			"string": "cpp",
+			"vector": "cpp"
 		}
 	}
 }

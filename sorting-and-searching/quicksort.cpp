@@ -28,7 +28,7 @@ void printArray(int *arr, int n){
 //using Nico Lumoto parition
 int partition(int* arr, int p, int r, int pivotIndex){
     swap(arr[pivotIndex], arr[r]); //putting the pivot on last
-    int cse = p - 1 ;//#items < pivot //index of smaller element
+    int cse = p - 1 ;//#items < pivot //index of smaller element //"Count Smaller Elements"
     loop(i, p, r - 1){
         if (arr[i] < arr[r]){
             cse++;
@@ -42,10 +42,10 @@ int partition(int* arr, int p, int r, int pivotIndex){
 void quicksort(int* arr, int p, int r){
     if (r > p) {
         //chosing a pivot element
-        int pivotIndex = (p + ((p+r)/2) + r) / 3;
-        int q = partition(arr, p, r, pivotIndex);
-        quicksort(arr, p, q - 1);
-        quicksort(arr, q + 1, r);
+        int pivotIndexBefore = (p + ((p+r)/2) + r) / 3;
+        int pivotIndexAfter = partition(arr, p, r, pivotIndexBefore);
+        quicksort(arr, p, pivotIndexAfter - 1);
+        quicksort(arr, pivotIndexAfter + 1, r);
     }
 }
 
@@ -60,9 +60,9 @@ int main(){
         cin >> arr[i]; 
     }
 
-    printArray(arr, n);
+    cout << "The array before sorting: "; printArray(arr, n);
     quicksort(arr, 0, n - 1);
-    printArray(arr, n);
+    cout << "The array after sorting: " ;printArray(arr, n);
     
     return 0;
 }

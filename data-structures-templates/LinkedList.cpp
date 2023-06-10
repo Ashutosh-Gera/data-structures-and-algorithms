@@ -129,7 +129,6 @@ Node* deleteNode(Node* head, int pos)
 
 
 Node* insertNodeRec(Node *head, int i, int data) {
-	// Write your code here
    
     if (i == 0)
     {
