@@ -23,7 +23,13 @@
 			"new": "cpp",
 			"deque": "cpp",
 			"string": "cpp",
-			"vector": "cpp"
+			"vector": "cpp",
+			"iosfwd": "cpp",
+			"numeric": "cpp",
+			"*.tcc": "cpp",
+			"list": "cpp",
+			"unordered_map": "cpp",
+			"unordered_set": "cpp"
 		}
 	}
 }
