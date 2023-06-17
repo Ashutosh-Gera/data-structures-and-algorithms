@@ -22,7 +22,7 @@ typedef pair<int, int> pInt;
 #define pb push_back    
 #define mp make_pair
 
-#define loop(i, a, b) for (int i = a; i <= b; i++) //for loop from a to b both inclusive
+#define loop(i, a, b) for (int i = a; i < b; ++i) //for loop [a, b)
 
 
 int main(){

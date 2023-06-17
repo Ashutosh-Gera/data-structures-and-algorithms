@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 using namespace std;
 
 typedef long long ll;
@@ -29,8 +30,8 @@ int merge(int* arr, int p, int q, int r){
         R[j] = arr[q + j + 1];
     }
 
-    L[n1] = INT32_MAX;
-    R[n2] = INT32_MAX;
+    L[n1] = __INT32_MAX__;
+    R[n2] = __INT32_MAX__;
 
     i = 0; j = 0;
 
