@@ -1,3 +1,28 @@
+/*
+          _____                    _____                    _____                    _____          
+         /\    \                  /\    \                  /\    \                  /\    \         
+        /::\    \                /::\    \                /::\____\                /::\____\        
+       /::::\    \              /::::\    \              /:::/    /               /:::/    /        
+      /::::::\    \            /::::::\    \            /:::/    /               /:::/    /         
+     /:::/\:::\    \          /:::/\:::\    \          /:::/    /               /:::/    /          
+    /:::/__\:::\    \        /:::/__\:::\    \        /:::/____/               /:::/    /           
+   /::::\   \:::\    \       \:::\   \:::\    \      /::::\    \              /:::/    /            
+  /::::::\   \:::\    \    ___\:::\   \:::\    \    /::::::\    \   _____    /:::/    /      _____  
+ /:::/\:::\   \:::\    \  /\   \:::\   \:::\    \  /:::/\:::\    \ /\    \  /:::/____/      /\    \ 
+/:::/  \:::\   \:::\____\/::\   \:::\   \:::\____\/:::/  \:::\    /::\____\|:::|    /      /::\____\
+\::/    \:::\  /:::/    /\:::\   \:::\   \::/    /\::/    \:::\  /:::/    /|:::|____\     /:::/    /
+ \/____/ \:::\/:::/    /  \:::\   \:::\   \/____/  \/____/ \:::\/:::/    /  \:::\    \   /:::/    / 
+          \::::::/    /    \:::\   \:::\    \               \::::::/    /    \:::\    \ /:::/    /  
+           \::::/    /      \:::\   \:::\____\               \::::/    /      \:::\    /:::/    /   
+           /:::/    /        \:::\  /:::/    /               /:::/    /        \:::\__/:::/    /    
+          /:::/    /          \:::\/:::/    /               /:::/    /          \::::::::/    /     
+         /:::/    /            \::::::/    /               /:::/    /            \::::::/    /      
+        /:::/    /              \::::/    /               /:::/    /              \::::/    /       
+        \::/    /                \::/    /                \::/    /                \::/____/        
+         \/____/                  \/____/                  \/____/                  ~~              
+                                                                                                    
+*/
+
 // This file contains my Cpp boiler template and useful guidelines..
 // To compile the code
 // g++ -std=c++17 -O2 -Wall test.cpp -o test
@@ -13,14 +38,19 @@ using namespace std;
 typedef long long ll;
 typedef vector<int> vInt;
 typedef pair<int, int> pInt;
+typedef long double ld;
 
+const ll mod = 1000000007;
+const ll inf = LLONG_MAX;
+const ll neg_inf = LLONG_MIN;
 
 //defining macros here
-#define endl '\n' //This is because "\n" works faster than endl, because endl always causes a flush operation
-#define f first
-#define s second 
-#define pb push_back    
-#define mp make_pair
+#define endl    '\n' //This is because "\n" works faster than endl, because endl always causes a flush operation
+#define f       first
+#define s       second 
+#define pb      push_back    
+#define mp      make_pair
+#define sz(x)   (int)x.size()
 
 #define loop(i, a, b) for (int i = a; i < b; ++i) //for loop [a, b)
 
@@ -30,10 +60,20 @@ int main(){
     //Fast I/O
     ios::sync_with_stdio(0);
     cin.tie(0);
+    cout.tie(0);
 
-
-
+    int tc = 1;
+    //cin >> tc;
+    loop(t, 0, tc) {
+        
+    }
+    
+    return 0;
 }
+
+//NOTE: IF you're getting runtime error even when everything seems fine with the code
+// you might be allocating a block of memory dynamically greater than the allocated size
+// so then you'll have to fix that!!
 
 //Normally we gonna use cin and cout for I/O mostly but below are some alternates
 // If we need to read the WHOLE input line (possibily contaning spaces), then we use getline function
