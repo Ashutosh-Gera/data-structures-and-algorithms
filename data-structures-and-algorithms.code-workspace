@@ -39,7 +39,9 @@
 			"span": "cpp",
 			"stacktrace": "cpp",
 			"regex": "cpp",
-			"valarray": "cpp"
+			"valarray": "cpp",
+			"complex": "cpp",
+			"chrono": "cpp"
 		}
 	}
 }
