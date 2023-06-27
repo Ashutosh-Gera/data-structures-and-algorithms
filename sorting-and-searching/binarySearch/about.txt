@@ -1,0 +1,1 @@
+Contains my solutions from edu section of binary search on codeforces: https://codeforces.com/edu/course/2/lesson/6/1

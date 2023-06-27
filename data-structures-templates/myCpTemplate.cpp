@@ -62,6 +62,8 @@ int main(){
     cin.tie(0);
     cout.tie(0);
 
+    // cout << setprecision(20);  <- set precision of output
+
     int tc = 1;
     //cin >> tc;
     loop(t, 0, tc) {
