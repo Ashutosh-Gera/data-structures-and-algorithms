@@ -51,6 +51,7 @@ const ll neg_inf = LLONG_MIN;
 #define pb      push_back    
 #define mp      make_pair
 #define sz(x)   (int)x.size()
+// #define prDouble(x) cout << fixed << setprecision(10) << x
 
 #define loop(i, a, b) for (int i = a; i < b; ++i) //for loop [a, b)
 
