@@ -1,5 +1,6 @@
 #include <iostream>
 #include <queue>
+#include <algorithm>
 #include "binaryTreeNode.h"
 
 using namespace std;
@@ -105,6 +106,7 @@ int numNodes(BinaryTreeNode<int>* root) {
     return 1 + numNodes(root->left) + numNodes(root->right);
 }
 
+//O(n)
 int height(BinaryTreeNode<int>* root) {
     if (root == NULL) return 0;
 
@@ -140,9 +142,113 @@ void postOrder(BinaryTreeNode<int>* root) {
     cout << root -> data << " ";
 }
 
+
+// Given the pre order and inorder traversal of a tree, construct the unique binary tree
+BinaryTreeNode<int>* treeConstruct(vector<int>& preOrderVec, vector<int>& inOrderVec, int preStart, int preEnd, int inStart, int inEnd) {
+    
+    if (preEnd < preStart) return NULL;
+    if (inEnd < inStart) return NULL;
+    
+    int rootData = preOrderVec[preStart]; //first elem of preOrder is the root
+    BinaryTreeNode<int>* root = new BinaryTreeNode<int>(rootData);
+
+    int leftPreStart = preStart + 1;
+    int leftInStart = inStart;
+    int rootIdx = -1;
+    for (int i = inStart; i <= inEnd; ++i) {
+        if (inOrderVec[i] == rootData) {
+            rootIdx = i;
+            break;
+        }
+    }
+    int leftInEnd = rootIdx - 1;
+    int leftPreEnd = leftPreStart + leftInEnd - leftInStart; // leftPreEnd - leftPreStart = leftInEnd - leftInStart
+
+    int rightPreStart = leftPreEnd + 1;
+    int rightPreEnd = preEnd;
+
+    int rightInStart = rootIdx + 1;
+    int rightInEnd = inEnd;
+
+    root->left = treeConstruct(preOrderVec, inOrderVec, leftPreStart, leftPreEnd, leftInStart, leftInEnd);
+    root->right = treeConstruct(preOrderVec, inOrderVec, rightPreStart, rightPreEnd, rightInStart, rightInEnd);
+    return root;
+} //ok tested
+
+//Given the postOrder & inOrder traversal, construct the binary tree
+BinaryTreeNode<int>* buildTree(vector<int>& postOrderVec, vector<int>& inOrderVec, int postStart, int postEnd, int inStart, int inEnd) {
+    if (postEnd < postStart) return NULL;
+    if (inEnd < inStart) return NULL;
+    
+    int rootData = postOrderVec[postEnd]; //last elem of postOrder is the root
+    BinaryTreeNode<int>* root = new BinaryTreeNode<int>(rootData);
+
+    int leftPostStart = postStart;
+    int leftInStart = inStart;
+    int rootIdx = -1;
+    for (int i = inStart; i <= inEnd; ++i) {
+        if (inOrderVec[i] == rootData) {
+            rootIdx = i;
+            break;
+        }
+    }
+    int leftInEnd = rootIdx - 1;
+    int leftPostEnd = leftPostStart + leftInEnd - leftInStart; // leftPostEnd - leftPostStart = leftInEnd - leftInStart
+
+    int rightPostEnd = postEnd - 1;
+    int rightPostStart = leftPostEnd + 1;
+
+    int rightInStart = rootIdx + 1;
+    int rightInEnd = inEnd;
+
+
+    root->left = buildTree(postOrderVec, inOrderVec, leftPostStart, leftPostEnd, leftInStart, leftInEnd);
+    root->right = buildTree(postOrderVec, inOrderVec, rightPostStart, rightPostEnd, rightInStart, rightInEnd);
+    return root;
+} //ok tested
+
+//this has time complexity O(n*h) h-> height of tree; n-> num of nodes of tree
+int diameter(BinaryTreeNode<int>* root) {
+    if (root == NULL) return 0;
+
+    int option1 = height(root->left) + height(root->right);
+    int option2 = diameter(root->left);
+    int option3 = diameter(root->right); //doing redundant work!!!!
+
+    return max({option1, option2, option3});
+}
+
+
+//Better diameter function ; works in O(n)
+pair<int,int> heightDiameter(BinaryTreeNode<int>* root) {
+    if (root == NULL) return {0,0};
+
+    //first = height ; second = diameter
+    pair<int,int> leftAns = heightDiameter(root->left);
+    pair<int,int> rightAns = heightDiameter(root->right);
+
+    pair<int,int> ans;
+    ans.first = 1 + max(leftAns.first, rightAns.first);
+    ans.second = max({leftAns.first + rightAns.first, leftAns.second, rightAns.second});
+    return ans;
+}
+
 // 1 2 3 4 5 6 7 -1 -1 -1 -1 8 9 -1 -1 -1 -1 -1 -1 
 int main() {
 
+    // int n;
+
+    // cin >> n;
+    // vector<int> postOrderVec(n);
+    // vector<int> inOrderVec(n);
+    // for (int i = 0; i < n; ++i) {
+    //     cin >> postOrderVec[i];
+    // }
+    // for (int i = 0; i < n; ++i) {
+    //     cin >> inOrderVec[i];
+    // }
+
+    // BinaryTreeNode<int>* root = buildTree(postOrderVec, inOrderVec, 0, n-1, 0, n-1);
     BinaryTreeNode<int>* root = takeInputLevelWise();
     // BinaryTreeNode<int>* node1 = new BinaryTreeNode<int>(2);
     // BinaryTreeNode<int>* node2 = new BinaryTreeNode<int>(3);
@@ -153,9 +259,11 @@ int main() {
     printTreeLevelWise(root);
     cout << numNodes(root) << endl;
     cout << height(root) << endl;
-    preOrder(root); cout << endl;
-    inOrder(root); cout << endl;
-    postOrder(root); cout << endl;
+    cout << diameter(root) << endl;
+    cout << heightDiameter(root).first << " " << heightDiameter(root).second << endl;
+    // preOrder(root); cout << endl;
+    // inOrder(root); cout << endl;
+    // postOrder(root); cout << endl;
 
     delete root;
 }

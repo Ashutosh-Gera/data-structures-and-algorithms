@@ -52,6 +52,5 @@ int main(){
         cin >> arr[i];
     }
     search(arr, n, 0);
-    
     return 0;
 }

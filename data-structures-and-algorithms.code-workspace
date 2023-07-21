@@ -43,7 +43,11 @@
 			"complex": "cpp",
 			"chrono": "cpp",
 			"iomanip": "cpp",
-			"cmath": "cpp"
+			"cmath": "cpp",
+			"type_traits": "cpp",
+			"limits": "cpp",
+			"hash_map": "cpp",
+			"forward_list": "cpp"
 		}
 	}
 }
