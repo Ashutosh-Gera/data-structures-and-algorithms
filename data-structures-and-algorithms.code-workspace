@@ -47,7 +47,9 @@
 			"type_traits": "cpp",
 			"limits": "cpp",
 			"hash_map": "cpp",
-			"forward_list": "cpp"
+			"forward_list": "cpp",
+			"algorithm": "cpp",
+			"format": "cpp"
 		}
 	}
 }

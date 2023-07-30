@@ -48,36 +48,19 @@ const ll NEG_INF = INT64_MIN;
 
 #define loop(i, a, b) for (int i = a; i < b; ++i) //for loop [a, b)
 
-ll solve(vector<vector<int>>& vec, int row, int col, int n, int m, ll prevSum) {
-    if (row == n - 1 && col == m - 1) {
-        return prevSum;
+int solve(vector<int>& r, vector<int>& c, int n, int curIdx, int left, int right) {
+    if (curIdx > n) return 1e9;
+    if (left <= 0 && right >= n) {
+        return 0;
     }
 
-    if (row >= n || col >= m) {
-        return NEG_INF; // Return a very large negative value for invalid paths
-    }
+    //include curIdx
+    int ans1 = c[curIdx] + solve(r, c, n, curIdx + 1, min(left, curIdx - r[curIdx]), max(right, curIdx + r[curIdx]));
 
-    // Move down or right
-    ll ans1 = 0;
-    ll ans2 = 0;
-    ll ans3 = 0;
-    // ll ans4 = solve(vec, row + 1, col, n, m, prevSum);
-    // ll ans5 = solve(vec, row, col + 1, n, m, prevSum);
+    //not include
+    int ans2 = solve(r, c, n, curIdx + 1, left, right);
 
-    if (row < n - 1) {
-        ans1 = solve(vec, row + 1, col, n, m, prevSum + vec[row+1][col] - vec[row][col]);
-    }
-    if (col < m - 1) {
-        ans2 = solve(vec, row, col + 1, n, m, prevSum + vec[row][col+1] - vec[row][col]);
-    }
-
-    // Move diagonally
-    if (row < n - 1 && col < m - 1) {
-        ans3 = solve(vec, row + 1, col + 1, n, m, prevSum + vec[row+1][col+1] - vec[row][col]);
-    }
-
-    // Return the maximum of the three options
-    return max({ans1, ans2, ans3});
+    return min(ans1, ans2);
 }
 
 
@@ -90,33 +73,22 @@ int main(){
     int tc = 1;
     //cin >> tc;
     loop(t, 0, tc) {
-        int n, m;
-        cin >> n >> m;
+        int n;
+        cin >> n;
 
-        vector<vector<int>> a(n, vector<int>(m));
+        //length of the garden
 
-        loop(i, 0, n) {
-            loop(j, 0, m) {
-                cin >> a[i][j];
-            }
-        }
-        ll ans = 0;
-        loop(i, 0, n) {
-            loop(j, 0, m) {
-                ans = max(ans, solve(a, i, j, n, m, 0));
-            }
-        }
-        // ans = max(ans, solve(a, 0, 0, n, m, 0));
-        cout << ans << endl;
-        // loop(i, 0, n) {
-        //     loop(j, 0, m) {
-        //         cout << a[i][j] << " ";
-        //     }
-        //     cout << endl;
-        // }
+        vector<int> r(n+1);
+        loop(i, 0, n+1) cin >> r[i];
+        vector<int> c(n+1);
+        loop(i, 0, n+1) cin >> c[i];
 
+        int ans = solve(r, c, n, 0, INT_MAX, INT_MIN);
+
+        cout << (ans == 1e9 ? -1 : ans) << endl;
 
     }
     
     return 0;
 }
+
