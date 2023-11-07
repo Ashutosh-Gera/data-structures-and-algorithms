@@ -91,6 +91,44 @@ void Dfs(vector<list<int>>& graph) {
 }
 
 
+//populates the parent of each vertex as well which gives us a spanning tree of the graph
+int parent[100001]; //size should be n + 1
+
+void whateverFirstSearch(vector<list<int>>& graph, int source, vector<bool>& visited) {
+    int prt = -1, curVertex = source; //putting -1 as parent of source node
+    stack<pii> s; // this is the "bag" // can use stack/queue/pq etc any for it, results would come accordingly
+    s.push({prt, curVertex});
+    
+    while (!s.empty()) {
+        int p = s.top().first;
+        int v = s.top().second;
+        s.pop();
+
+        if (!visited[v]) {
+            cout << v << " ";
+            visited[v] = true;
+            parent[v] = p;
+            for (auto i : graph[v]){
+                s.push({v, i});
+            }
+        }
+    }
+}
+
+void wfsAll(vector<list<int>>& graph) {
+    vector<bool> vis(n+1, false);
+    loop(i, 1, n+1) {
+        if (!vis[i]){
+            whateverFirstSearch(graph, i, vis);
+        }
+    }
+
+    loop(i, 1, n+1) {
+        cout << endl << parent[i] << " ";
+    }
+}
+
+
 //Undirected connected graph:
 // 11 11 1 2 1 6 1 7 2 3 2 4 2 5 6 5 7 9 7 11 4 8 9 10
 
@@ -116,8 +154,9 @@ int main(){
         //undirected unweighted graph
     }
 
-    Dfs(graph);
-    
+    // Dfs(graph);
+    memset(parent, -1, sizeof(parent));
+    wfsAll(graph); 
 
     
     
